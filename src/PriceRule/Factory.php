@@ -1,10 +1,6 @@
 <?php
 namespace Pricemotion\Sdk\PriceRule;
 
-use Pricemotion\Sdk\PriceRule\Disabled;
-use Pricemotion\Sdk\PriceRule\EqualToPosition;
-use Pricemotion\Sdk\PriceRule\PriceRuleInterface;
-
 class Factory {
     private const RULE_CLASSES = [
         'disabled' => Disabled::class,

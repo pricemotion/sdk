@@ -2,7 +2,6 @@
 namespace Pricemotion\Sdk\PriceRule;
 
 use Pricemotion\Sdk\Data\Product;
-use Pricemotion\Sdk\PriceRule\PriceRuleInterface;
 
 class LessThanPosition implements PriceRuleInterface {
     private $value;

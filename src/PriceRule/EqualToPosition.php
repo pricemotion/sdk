@@ -2,9 +2,7 @@
 namespace Pricemotion\Sdk\PriceRule;
 
 use Pricemotion\Sdk\Data\Product;
-use Pricemotion\Sdk\PriceRule\PriceRuleInterface;
 
-/** @phan-suppress-next-line PhanUnreferencedClass */
 class EqualToPosition implements PriceRuleInterface {
     private $value;
 

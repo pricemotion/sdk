@@ -3,7 +3,6 @@ namespace Pricemotion\Sdk\PriceRule;
 
 use PHPUnit\Framework\TestCase;
 use Pricemotion\Sdk\Data\ProductTest;
-use Pricemotion\Sdk\PriceRule\EqualToPosition;
 
 class EqualToPositionTest extends TestCase {
     public function testCalculate() {

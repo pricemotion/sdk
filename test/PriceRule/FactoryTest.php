@@ -5,10 +5,6 @@ use DOMDocument;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Pricemotion\Sdk\Data\Product;
-use Pricemotion\Sdk\PriceRule\Disabled;
-use Pricemotion\Sdk\PriceRule\Factory;
-use Pricemotion\Sdk\PriceRule\LessThanPosition;
-use Pricemotion\Sdk\PriceRule\PercentageBelowAverage;
 
 class FactoryTest extends TestCase {
     public function testDisabled() {
