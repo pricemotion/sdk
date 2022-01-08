@@ -1,6 +1,8 @@
 <?php
 namespace Pricemotion\Sdk\Data;
 
+use Pricemotion\Sdk\Util\Xml;
+
 class Offer {
     private $seller;
 
