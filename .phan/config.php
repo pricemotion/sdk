@@ -1,8 +1,11 @@
 <?php declare(strict_types=1);
 
+$vendor = ['vendor/psr/simple-cache/src'];
+
 return [
     'target_php_version' => '7.4',
-    'directory_list' => ['src'],
+    'directory_list' => ['src', ...$vendor],
+    'exclude_analysis_directory_list' => $vendor,
     'plugins' => [
         'AlwaysReturnPlugin',
         'DollarDollarPlugin',

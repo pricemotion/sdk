@@ -28,6 +28,7 @@ class FactoryTest extends TestCase {
         $product = $this->getProductFromXml('
             <response>
                 <info>
+                    <ean>8717807205492</ean>
                     <price>
                         <min>0</min>
                         <max>0</max>
@@ -49,6 +50,7 @@ class FactoryTest extends TestCase {
         $product = $this->getProductFromXml('
             <response>
                 <info>
+                    <ean>8717807205492</ean>
                     <price>
                         <min>0</min>
                         <max>0</max>

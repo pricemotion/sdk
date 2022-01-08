@@ -4,11 +4,13 @@ namespace Pricemotion\Sdk\Data;
 use Pricemotion\Sdk\Util\Xml;
 
 class Product {
-    private $lowestPrice;
+    private Ean $ean;
 
-    private $averagePrice;
+    private float $lowestPrice;
 
-    private $offers;
+    private float $averagePrice;
+
+    private OfferCollection $offers;
 
     private function __construct() {
     }
@@ -25,6 +27,7 @@ class Product {
         }
 
         $product = new self();
+        $product->ean = Ean::fromString(Xml::getText($root, 'info/ean'));
         $product->lowestPrice = Xml::getFloat($root, 'info/price/min');
         $product->averagePrice = Xml::getFloat($root, 'info/price/avg');
         $product->offers = OfferCollection::fromNode(Xml::get($root, 'prices'));
@@ -42,5 +45,9 @@ class Product {
 
     public function getOffers(): OfferCollection {
         return $this->offers;
+    }
+
+    public function getEan(): Ean {
+        return $this->ean;
     }
 }
