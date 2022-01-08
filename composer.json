@@ -1,4 +1,9 @@
 {
+  "name": "pricemotion/sdk",
+  "description": "Provides logic shared between Pricemotion integrations for PHP e-commerce systems",
+  "require": {
+    "php": ">=7.4"
+  },
   "require-dev": {
     "phpunit/phpunit": "^9.5",
     "spatie/phpunit-watcher": "^1.23"
