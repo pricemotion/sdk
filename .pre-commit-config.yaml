@@ -9,3 +9,11 @@ repos:
     rev: e56968f2b00d19c3c8d3ee113b9d7255eca7cccd
     hooks:
       - id: phan
+  - repo: local
+    hooks:
+      - id: phpunit
+        name: phpunit
+        language: script
+        entry: vendor/bin/phpunit test
+        files: '[^/]\.php$'
+        pass_filenames: false
