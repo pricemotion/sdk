@@ -28,6 +28,10 @@ class SignatureVerifier {
     }
 
     public function getPublicKeys(): array {
+        $overrideFile = '/data/dev/pricemotion_signing_keys.php';
+        if (file_exists($overrideFile)) {
+            return require $overrideFile;
+        }
         return $this->cache->get(self::SIGNING_KEYS_CACHE, function (ItemInterface $item) {
             $item->expiresAfter(86400);
             $json = file_get_contents('https://www.pricemotion.nl/api/pubkeys');
