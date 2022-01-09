@@ -14,6 +14,6 @@ class WebhookRequestTest extends TestCase {
         $requestBody = file_get_contents(__DIR__ . '/../resources/webhook-payload');
         $webhookRequest = $webhookRequestFactory->createFromRequestBody($requestBody);
         $product = $webhookRequest->getProduct();
-        $this->assertEquals('88381179522', $product->getEan()->toString());
+        $this->assertEquals('0088381179522', $product->getEan()->toString());
     }
 }

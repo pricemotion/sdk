@@ -10,8 +10,8 @@ class Ean implements JsonSerializable {
     private function __construct(string $ean) {
         $ean = trim($ean);
         $ean = ltrim($ean, '0');
-        if (!preg_match('/^[0-9]{8,14}$/', $ean)) {
-            throw new InvalidArgumentException('EAN must consist of 8 to 14 digits');
+        if (!preg_match('/^[0-9]{8,13}$/', $ean)) {
+            throw new InvalidArgumentException('EAN must consist of 8 to 13 digits');
         }
         if (!$this->check($ean)) {
             throw new InvalidArgumentException('EAN check digit is invalid');
@@ -40,7 +40,7 @@ class Ean implements JsonSerializable {
     }
 
     public function toString(): string {
-        return $this->value;
+        return str_pad($this->value, 13, '0', STR_PAD_LEFT);
     }
 
     public function jsonSerialize(): string {
