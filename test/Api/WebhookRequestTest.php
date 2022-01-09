@@ -2,13 +2,13 @@
 
 namespace Pricemotion\Sdk\Api;
 
-use Cache\Adapter\PHPArray\ArrayCachePool;
 use PHPUnit\Framework\TestCase;
 use Pricemotion\Sdk\Crypto\SignatureVerifier;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 class WebhookRequestTest extends TestCase {
     public function testWebhookRequest(): void {
-        $cache = new ArrayCachePool();
+        $cache = new ArrayAdapter();
         $verifier = new SignatureVerifier($cache);
         $webhookRequestFactory = new WebhookRequestFactory($verifier);
         $requestBody = file_get_contents(__DIR__ . '/../resources/webhook-payload');

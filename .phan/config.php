@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-$vendor = ['vendor/psr/simple-cache/src'];
+$vendor = ['vendor/psr/cache/src', 'vendor/symfony/cache-contracts'];
 
 return [
     'target_php_version' => '7.4',

@@ -3,7 +3,8 @@
 namespace Pricemotion\Sdk\Crypto;
 
 use Pricemotion\Sdk\RuntimeException;
-use Psr\SimpleCache\CacheInterface;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class SignatureVerifier {
     private const SIGNING_KEYS_CACHE = 'pricemotion.signing_keys';
@@ -27,7 +28,8 @@ class SignatureVerifier {
     }
 
     public function getPublicKeys(): array {
-        return $this->remember(self::SIGNING_KEYS_CACHE, function () {
+        return $this->cache->get(self::SIGNING_KEYS_CACHE, function (ItemInterface $item) {
+            $item->expiresAfter(86400);
             $json = file_get_contents('https://www.pricemotion.nl/api/pubkeys');
             if ($json === false) {
                 throw new RuntimeException('Could not retrieve Pricemotion public keys');
@@ -38,15 +40,5 @@ class SignatureVerifier {
             }
             return array_values($data['signatures']);
         });
-    }
-
-    private function remember(string $key, \Closure $fn) {
-        $value = $this->cache->get($key);
-        if ($value !== null) {
-            return $value;
-        }
-        $value = $fn();
-        $this->cache->set($key, $value, 86400);
-        return $value;
     }
 }
