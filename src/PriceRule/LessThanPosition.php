@@ -2,6 +2,7 @@
 namespace Pricemotion\Sdk\PriceRule;
 
 use Pricemotion\Sdk\Data\Product;
+use Pricemotion\Sdk\InvalidArgumentException;
 
 class LessThanPosition implements PriceRuleInterface {
     private $value;
@@ -9,7 +10,7 @@ class LessThanPosition implements PriceRuleInterface {
     public function __construct($value) {
         $this->value = (int) $value;
         if ($this->value < 1) {
-            throw new \InvalidArgumentException('Less than position value must be at least 1');
+            throw new InvalidArgumentException('Less than position value must be at least 1');
         }
     }
 

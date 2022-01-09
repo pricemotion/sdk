@@ -2,7 +2,7 @@
 namespace Pricemotion\Sdk\PriceRule;
 
 use DOMDocument;
-use InvalidArgumentException;
+use Pricemotion\Sdk\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Pricemotion\Sdk\Data\Product;
 

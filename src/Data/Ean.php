@@ -1,8 +1,8 @@
 <?php
 namespace Pricemotion\Sdk\Data;
 
-use InvalidArgumentException;
 use JsonSerializable;
+use Pricemotion\Sdk\InvalidArgumentException;
 
 class Ean implements JsonSerializable {
     private $value;
