@@ -1,6 +1,7 @@
 <?php
 namespace Pricemotion\Sdk\Data;
 
+use Pricemotion\Sdk\RuntimeException;
 use Pricemotion\Sdk\Util\Xml;
 
 class Product {
@@ -19,11 +20,11 @@ class Product {
         $root = $document->documentElement;
 
         if (!strcasecmp($root->tagName, 'error')) {
-            throw new \RuntimeException('API error: ' . trim($root->textContent));
+            throw new RuntimeException('API error: ' . trim($root->textContent));
         }
 
         if (strcasecmp($root->tagName, 'response')) {
-            throw new \RuntimeException("Response root element should be <response>, not <{$root->tagName}>");
+            throw new RuntimeException("Response root element should be <response>, not <{$root->tagName}>");
         }
 
         $product = new self();
