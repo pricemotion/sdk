@@ -3,8 +3,10 @@
 namespace Pricemotion\Sdk\Product;
 
 use PHPUnit\Framework\TestCase;
+use Pricemotion\Sdk\Data\ProductTest;
 use Pricemotion\Sdk\PriceRule\Disabled;
 use Pricemotion\Sdk\PriceRule\EqualToPosition;
+use Psr\Log\AbstractLogger;
 
 class SettingsTest extends TestCase {
     public function testSettings(): void {
@@ -20,11 +22,32 @@ class SettingsTest extends TestCase {
             'roundPrecision' => 0.1,
             'roundUp' => true,
         ]);
+
         $this->assertInstanceOf(EqualToPosition::class, $settings->getPriceRule());
         $this->assertSame(10., $settings->getMinimumMarginPercentage());
         $this->assertSame(50., $settings->getMaximumListPriceDiscountPercentage());
         $this->assertTrue($settings->getRoundUp());
         $this->assertSame(0.1, $settings->getRoundPrecision());
+
+        $product = new class implements ProductInterface {
+            public function getId(): string {
+                return '';
+            }
+
+            public function getPrice(): float {
+                return 100.0;
+            }
+
+            public function getCostPrice(): ?float {
+                return 10.0;
+            }
+
+            public function getListPrice(): ?float {
+                return null;
+            }
+        };
+        $pricemotionProduct = ProductTest::getProduct();
+        $this->assertSame(60.1, $settings->getNewPrice($product, $pricemotionProduct));
     }
 
     public function testEmpty(): void {
