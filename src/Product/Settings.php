@@ -147,7 +147,8 @@ class Settings {
             $newPrice = $roundedPrice;
         }
 
-        if (abs($product->getPrice() - $newPrice) < 0.005) {
+        $productPrice = $product->getPrice();
+        if ($productPrice !== null && abs($productPrice - $newPrice) < 0.005) {
             $this->logger->debug(
                 sprintf(
                     'Would adjust product %s price to %.2f according to %s, but it is already there',
@@ -163,7 +164,7 @@ class Settings {
             sprintf(
                 'Adjusting product %s price from %.2f to %.2f according to %s',
                 $product->getId(),
-                $product->getPrice(),
+                $product->getPrice() ?? '(none)',
                 $newPrice,
                 get_class($this->getPriceRule()),
             ),

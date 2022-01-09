@@ -4,7 +4,7 @@ namespace Pricemotion\Sdk\Product;
 
 interface ProductInterface {
     public function getId(): string;
-    public function getPrice(): float;
+    public function getPrice(): ?float;
     public function getCostPrice(): ?float;
     public function getListPrice(): ?float;
 }
