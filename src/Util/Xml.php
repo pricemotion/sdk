@@ -1,8 +1,6 @@
 <?php
 namespace Pricemotion\Sdk\Util;
 
-use Pricemotion\Sdk\RuntimeException;
-
 class Xml {
     public static function getFloat(\DOMNode $root, string $query): float {
         return (float) self::getText($root, $query);
@@ -14,8 +12,11 @@ class Xml {
 
     public static function get(\DOMNode $root, string $query): \DOMNode {
         $elements = self::getAll($root, $query);
+        if ($elements->length === 0) {
+            throw new Xml\NoElementsException("Got no element from query '{$query}'");
+        }
         if ($elements->length !== 1) {
-            throw new RuntimeException("Expected exactly one result from query '{$query}'");
+            throw new Xml\TooManyElementsException("Got too many results ({$elements->length}) from query '{$query}'");
         }
         /** @phan-suppress-next-line PhanTypeMismatchReturnNullable */
         return $elements->item(0);
