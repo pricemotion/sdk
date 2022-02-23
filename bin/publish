@@ -3,4 +3,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+tag=$(git describe --tags --match='v*' --exact-match)
+
 git push --tags git@github.com:pricemotion/sdk master
+
+hub release create -m "Pricemotion SDK ${tag}" "${tag}"
