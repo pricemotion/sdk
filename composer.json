@@ -1,6 +1,15 @@
 {
   "name": "pricemotion/sdk",
   "description": "Provides logic shared between Pricemotion integrations for PHP e-commerce systems",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Albert Peschar",
+      "email": "albert@peschar.net",
+      "homepage": "https://peschar.net",
+      "role": "Developer"
+    }
+  ],
   "require": {
     "php": ">=7.4",
     "ext-json": "*",
