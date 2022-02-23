@@ -8,6 +8,10 @@ Currently this SDK does not provide a complete interface for Pricemotion's API.
 What it does contain is logic for handling webhook requests, and for processing
 the XML returned by the Pricemotion API.
 
+Links:
+
+- [API documentation][phpdoc]
+
 ## Getting started
 
 Installation is easy, whether you use Composer or not.
@@ -98,3 +102,4 @@ foreach ($product->getOffers() as $offer) {
 
 [rel]: https://github.com/pricemotion/sdk/releases
 [symfcache]: https://symfony.com/doc/current/components/cache.html
+[phpdoc]: https://pricemotion.github.io/sdk/doc/namespaces/pricemotion-sdk.html
