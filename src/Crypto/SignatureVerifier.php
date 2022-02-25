@@ -28,8 +28,8 @@ class SignatureVerifier {
     }
 
     public function getPublicKeys(): array {
-        $overrideFile = '/data/dev/pricemotion_signing_keys.php';
-        if (file_exists($overrideFile)) {
+        $overrideFile = @getenv('PRICEMOTION_SDK_SIGNATURES_FILE');
+        if ($overrideFile && @file_exists($overrideFile)) {
             return require $overrideFile;
         }
         return $this->cache->get(self::SIGNING_KEYS_CACHE, function (ItemInterface $item) {
