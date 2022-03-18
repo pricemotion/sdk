@@ -8,7 +8,7 @@ class OfferCollection implements \IteratorAggregate {
     private $offers;
 
     private function __construct(array $offers) {
-        $this->offers = $offers;
+        $this->offers = array_values($offers);
         usort($this->offers, function (Offer $a, Offer $b) {
             return $a->getPrice() <=> $b->getPrice() ?: $a->getSeller() <=> $b->getSeller();
         });
@@ -23,8 +23,6 @@ class OfferCollection implements \IteratorAggregate {
     }
 
     public function getIterator() {
-        foreach ($this->offers as $offer) {
-            yield $offer;
-        }
+        yield from $this->offers;
     }
 }
