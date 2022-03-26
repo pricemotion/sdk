@@ -22,9 +22,7 @@ class Client {
                 CURLOPT_URL => 'https://www.pricemotion.nl/api/product/follow',
                 CURLOPT_USERPWD => "{$this->apiKey}:",
                 CURLOPT_POSTFIELDS => json_encode(
-                    array_map(function (Ean $ean): string {
-                        return $ean->toString();
-                    }, $eans->toArray()),
+                    array_map(fn(Ean $ean) => $ean->toString(), $eans->toArray()),
                     JSON_THROW_ON_ERROR,
                 ),
                 CURLOPT_FAILONERROR => true,
