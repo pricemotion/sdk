@@ -25,6 +25,7 @@ class Client {
                     array_map(function (Ean $ean): string {
                         return $ean->toString();
                     }, $eans->toArray()),
+                    JSON_THROW_ON_ERROR,
                 ),
                 CURLOPT_FAILONERROR => true,
                 CURLOPT_RETURNTRANSFER => true,
