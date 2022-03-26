@@ -3,15 +3,21 @@ namespace Pricemotion\Sdk\Data;
 
 use Pricemotion\Sdk\Util\Xml;
 
-class OfferCollection implements \IteratorAggregate {
-    /** @var Offer[] $offers */
-    private $offers;
+/** @inherits Collection<Offer> */
+class OfferCollection extends Collection {
+    protected function isValidElement($element): bool {
+        return $element instanceof Offer;
+    }
 
-    private function __construct(array $offers) {
-        $this->offers = array_values($offers);
-        usort($this->offers, function (Offer $a, Offer $b) {
+    /**
+     * @param Offer[] $elements
+     * @return Offer[]
+     */
+    protected function sortElements(array $elements): array {
+        usort($elements, function (Offer $a, Offer $b) {
             return $a->getPrice() <=> $b->getPrice() ?: $a->getSeller() <=> $b->getSeller();
         });
+        return $elements;
     }
 
     public static function fromNode(\DOMNode $element): self {
@@ -20,9 +26,5 @@ class OfferCollection implements \IteratorAggregate {
             $offers[] = Offer::fromElement($item);
         }
         return new self($offers);
-    }
-
-    public function getIterator() {
-        yield from $this->offers;
     }
 }

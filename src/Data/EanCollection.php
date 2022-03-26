@@ -2,18 +2,10 @@
 
 namespace Pricemotion\Sdk\Data;
 
-use Pricemotion\Sdk\InvalidArgumentException;
-
-class EanCollection implements \IteratorAggregate {
-    private $eans;
-
-    public function __construct(array $eans) {
-        foreach ($eans as $ean) {
-            if (!$ean instanceof Ean) {
-                throw new InvalidArgumentException('EanCollection can only contain Ean instances');
-            }
-        }
-        $this->eans = array_values($eans);
+/** @inherits Collection<Ean> */
+class EanCollection extends Collection {
+    protected function isValidElement($element): bool {
+        return $element instanceof Ean;
     }
 
     public static function fromStrings(array $strings): self {
@@ -22,13 +14,5 @@ class EanCollection implements \IteratorAggregate {
                 return Ean::fromString($string);
             }, $strings),
         );
-    }
-
-    public function getIterator(): \Generator {
-        yield from $this->eans;
-    }
-
-    public function toArray(): array {
-        return $this->eans;
     }
 }
