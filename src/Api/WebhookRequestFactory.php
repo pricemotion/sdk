@@ -16,4 +16,8 @@ class WebhookRequestFactory {
         $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
         return new WebhookRequest($data);
     }
+
+    public function createFromInput(): WebhookRequest {
+        return $this->createFromRequestBody(file_get_contents('php://input'));
+    }
 }
