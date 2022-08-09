@@ -4,7 +4,7 @@ namespace Pricemotion\Sdk\Crypto;
 
 use Pricemotion\Sdk\RuntimeException;
 use Symfony\Contracts\Cache\CacheInterface;
-use Symfony\Contracts\Cache\ItemInterface;
+use Psr\Cache\CacheItemInterface;
 
 class SignatureVerifier {
     private const SIGNING_KEYS_CACHE = 'pricemotion.signing_keys';
@@ -32,7 +32,7 @@ class SignatureVerifier {
         if ($overrideFile && @file_exists($overrideFile)) {
             return require $overrideFile;
         }
-        return $this->cache->get(self::SIGNING_KEYS_CACHE, function (ItemInterface $item) {
+        return $this->cache->get(self::SIGNING_KEYS_CACHE, function (CacheItemInterface $item) {
             $item->expiresAfter(86400);
             $json = file_get_contents('https://www.pricemotion.nl/api/pubkeys');
             if ($json === false) {
